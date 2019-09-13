@@ -6,7 +6,15 @@
   <p>
     {{joke.value}}
   </p>
-  <nuxt-link to="/more">More</nuxt-link>
+  <form @submit.prevent="onSubmit">
+    <input  type="number" min="10" max="100" step="10" v-model="count" placeholder="Enter number 10,20,30... etc" required/>
+    <input type="submit" value="More jokes from this category" />
+  </form>
+   <div class="joke" v-for="(joke,index) of arrayOfJokes" :key="index">
+     <p>{{joke.icon_url}}</p>
+   {{joke.value}}
+  </div>
+  
 </div>
 
   
@@ -18,8 +26,29 @@ import axios from "axios";
 export default {
   data() {
     return {
-      joke: {}
+      joke: {},
+      count:"",
+      arrayOfJokes:[]
     };
+  },
+    methods: {
+    
+     async  onSubmit() {
+      try {
+        for (let i = 0; i < this.count; i++) {
+          const res = await axios.get(`https://api.chucknorris.io/jokes/random?category=${this.$route.params.id}` );
+         this.arrayOfJokes.push(res.data)
+      }
+      console.log("here")
+      console.log(this.arrayOfJokes)
+    } catch (error) {
+      console.log(error);
+    }
+                                 
+      
+      this.count = "";
+  
+    }
   },
   async created() {
    try {
@@ -27,7 +56,7 @@ export default {
       `https://api.chucknorris.io/jokes/random?category=${this.$route.params.id}`
     );
    this.joke=res.data;
-   console.log(this.joke)
+ 
      
    } catch (error) {
      console.log(error)
