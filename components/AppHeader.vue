@@ -4,7 +4,7 @@
     <ul>
       <li>
         <nuxt-link to="/">Home</nuxt-link>
-        <nuxt-link to="/about">About</nuxt-link>
+        <nuxt-link to="/randomJokes">Random Jokes</nuxt-link>
         <nuxt-link to="/categories">Categories</nuxt-link>
       </li>
     </ul>

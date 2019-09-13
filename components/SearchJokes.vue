@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" v-model="text" placeholder="Search Jokes..." />
+    <input type="text" v-model="text" placeholder="Search Jokes..." required/>
     <input type="submit" value="Search Jokes" />
   </form>
 </template>
